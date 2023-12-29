@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: postgres.Dockerfile
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: chatbot_db
+      POSTGRES_USER: chatbot_admin
+      POSTGRES_PASSWORD: chatbot_admin
+    volumes:
+       - chatbot_db:/data/chatbot_db
+    restart: unless-stopped
+
+volumes:
+    chatbot_db:
+      external: true
